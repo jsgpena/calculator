@@ -11,7 +11,8 @@ function updateDisplay() {
     const display = document.getElementById('display');
     display.innerText = displayValue;
     if (displayValue.length>9){
-        display.innerText = displayValue.substring(0,9);
+        displayValue = parseFloat(displayValue.substring(0,9));
+        display.innerText = displayValue;
     }
 }
   
