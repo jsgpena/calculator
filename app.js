@@ -10,8 +10,8 @@ const buttons = document.querySelectorAll('button');
 function updateDisplay() {
     const display = document.getElementById('display');
     display.innerText = displayValue;
-    if(displayValue.length > 10) {
-        display.innerText = displayValue.substring(0, 10);
+    if(displayValue.length > 9) {
+        display.innerText = displayValue.substring(0, 9);
     }
 }
   
@@ -67,14 +67,14 @@ function inputOperator(operator) {
         secondOperator = operator;
         secondOperand = displayValue;
         result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
-        displayValue = roundAccurately(result, 8).toString();
+        displayValue = result;
         firstOperand = displayValue;
         result = null;
     } else if(firstOperator != null && secondOperator != null) {
         secondOperand = displayValue;
         result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
         secondOperator = operator;
-        displayValue = roundAccurately(result, 8).toString();
+        displayValue = result;
         firstOperand = displayValue;
         result = null;
     } else { 
@@ -92,7 +92,7 @@ function inputEquals() {
         if(result === 'error') {
             displayValue = 'error';
         } else {
-            displayValue = roundAccurately(result, 8).toString();
+            displayValue = result;
             firstOperand = displayValue;
             secondOperand = null;
             firstOperator = null;
@@ -105,7 +105,7 @@ function inputEquals() {
         if(result === 'error') {
             displayValue = 'error';
         } else {
-            displayValue = roundAccurately(result, 8).toString();
+            displayValue = result;
             firstOperand = displayValue;
             secondOperand = null;
             firstOperator = null;
@@ -152,8 +152,4 @@ function operate(x, y, op) {
         return x / y;
         }
     }
-}
-
-function roundAccurately(num, places) {
-    return parseFloat(Math.round(num + 'e' + places) + 'e-' + places);
 }
