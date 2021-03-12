@@ -1,6 +1,5 @@
 .calc {
     max-width: 400px;
-    border: 2px black solid;
     border-radius: 15px;
     margin: 30px auto;
     padding: 20px;
@@ -8,16 +7,13 @@
   }
   
 .display {
-    min-height: 80px;
+    min-height: 40px;
     padding: 20px;
-    border: 2px black solid;
     border-radius: 5px;
     background-color: lightblue;
     margin-bottom: 1em;
-    font-size: 3em;
+    font-size: 2em;
     text-align: right;
-    word-wrap: break-word;
-    word-break: break-all;
   }
   
 .buttons-grid {

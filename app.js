@@ -10,8 +10,8 @@ const buttons = document.querySelectorAll('button');
 function updateDisplay() {
     const display = document.getElementById('display');
     display.innerText = displayValue;
-    if(displayValue.length > 9) {
-        display.innerText = displayValue.substring(0, 9);
+    if (displayValue.length>9){
+        display.innerText = displayValue.slice(0,9);
     }
 }
   
@@ -66,13 +66,13 @@ function inputOperator(operator) {
     if(firstOperator != null && secondOperator === null) {
         secondOperator = operator;
         secondOperand = displayValue;
-        result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
+        result = operate(parseFloat(firstOperand), parseFloat(secondOperand), firstOperator);
         displayValue = result;
         firstOperand = displayValue;
         result = null;
     } else if(firstOperator != null && secondOperator != null) {
         secondOperand = displayValue;
-        result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
+        result = operate(parseFloat(firstOperand), parseFloat(secondOperand), secondOperator);
         secondOperator = operator;
         displayValue = result;
         firstOperand = displayValue;
@@ -88,7 +88,7 @@ function inputEquals() {
         displayValue = displayValue;
     } else if(secondOperator != null) {
         secondOperand = displayValue;
-        result = operate(Number(firstOperand), Number(secondOperand), secondOperator);
+        result = operate(parseFloat(firstOperand), parseFloat(secondOperand), secondOperator);
         if(result === 'error') {
             displayValue = 'error';
         } else {
@@ -101,7 +101,7 @@ function inputEquals() {
         }
     } else {
         secondOperand = displayValue;
-        result = operate(Number(firstOperand), Number(secondOperand), firstOperator);
+        result = operate(parseFloat(firstOperand), parseFloat(secondOperand), firstOperator);
         if(result === 'error') {
             displayValue = 'error';
         } else {
