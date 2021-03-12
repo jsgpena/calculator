@@ -11,7 +11,7 @@ function updateDisplay() {
     const display = document.getElementById('display');
     display.innerText = displayValue;
     if (displayValue.length>9){
-        display.innerText = displayValue.slice(0,9);
+        display.innerText = displayValue.substring(0,9);
     }
 }
   
@@ -48,18 +48,12 @@ function inputOperand(operand) {
     if(firstOperator === null) {
         if(displayValue === '0' || displayValue === 0) {
             displayValue = operand;
-        } else if(displayValue === firstOperand) {
-            displayValue = operand;
         } else {
             displayValue += operand;
         }
     } else {
-        if(displayValue === firstOperand) {
-            displayValue = operand;
-        } else {
             displayValue += operand;
         }
-    }
 }
 
 function inputOperator(operator) {
@@ -67,19 +61,20 @@ function inputOperator(operator) {
         secondOperator = operator;
         secondOperand = displayValue;
         result = operate(parseFloat(firstOperand), parseFloat(secondOperand), firstOperator);
-        displayValue = result;
+        displayValue = roundNumber(result, 5);
         firstOperand = displayValue;
         result = null;
     } else if(firstOperator != null && secondOperator != null) {
         secondOperand = displayValue;
         result = operate(parseFloat(firstOperand), parseFloat(secondOperand), secondOperator);
         secondOperator = operator;
-        displayValue = result;
+        displayValue = roundNumber(result, 5);
         firstOperand = displayValue;
         result = null;
     } else { 
         firstOperator = operator;
         firstOperand = displayValue;
+        displayValue = "";
     }
 }
 
@@ -92,7 +87,7 @@ function inputEquals() {
         if(result === 'error') {
             displayValue = 'error';
         } else {
-            displayValue = result;
+            displayValue = roundNumber(result, 5);
             firstOperand = displayValue;
             secondOperand = null;
             firstOperator = null;
@@ -105,7 +100,7 @@ function inputEquals() {
         if(result === 'error') {
             displayValue = 'error';
         } else {
-            displayValue = result;
+            displayValue = roundNumber(result, 5);
             firstOperand = displayValue;
             secondOperand = null;
             firstOperator = null;
@@ -153,3 +148,7 @@ function operate(x, y, op) {
         }
     }
 }
+
+function roundNumber(num, dec) {
+    return Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
+  }
